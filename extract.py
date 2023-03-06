@@ -38,8 +38,8 @@ def daily(symbol, use_proxy, url, logger):
         proxy = choice(proxy_array)
         logger.info("Proxy: " + proxy)
         logger.info('something')
-        data = {"hostname": "www.bloomberg.com",
-            "path": "/markets/api/bulk-time-series/price/" + symbol + url,
+        data = {"hostname": host1,
+            "path": path1 + symbol + url,
             "method": "GET",
             "port": 443,
             "headers": headers}
@@ -48,7 +48,7 @@ def daily(symbol, use_proxy, url, logger):
             r = requests.post(proxy, json=data)
             logger.info('Use proxy')
         else:
-            r = requests.get("http://www.bloomberg.com/markets/api/bulk-time-series/price/"+ symbol + url, headers=headers)
+            r = requests.get(path + symbol + url, headers=headers)
             logger.info('No proxy for u')
 
         j = r.json()
@@ -75,8 +75,8 @@ def daily(symbol, use_proxy, url, logger):
 '''
 symbols = ['BSX:IND', 'CRYTR:IND', 'CRSMBCT:IND', 'MSETOP:IND']
 
-bloomberg_url_2="?timeFrame=1_YEAR"
-url = bloomberg_url_2
+
+
 
 daily(symbols[0], False, url)
 '''
